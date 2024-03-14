@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "dice-rolling-app"
+version = "0.1.0"
+description = ""
+authors = ["millm124 <150197370+millm124@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "dice_rolling_app"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pyqt6 = "^6.6.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
