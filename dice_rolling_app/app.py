@@ -41,20 +41,25 @@ class MainWindow(QMainWindow):
 
         ]
 
-        num_slider = QSlider
+        
+        num_slider = QSlider(Qt.Orientation.Horizontal)
         num_slider.setRange(1, 100)
+        num_slider.setSingleStep(1)
 
-        operation_box = QComboBox
+        operation_box = QComboBox()
         operation_box.addItems(["Addition", "Multiplication", "Subtraction (L-R)", "ubtraction (R-L)", "division (L-R)", "division (R-L)"])
 
-        side_box = QComboBox
+
+        side_box = QComboBox()
         side_box.addItems(["4", "6", "8", "10", "12", "20", "100"])
 
-        roll_button = QPushButton(text = "Roll")
+        roll_button = QPushButton(text = "Roll", parent=self)
+        roll_button.setFixedSize(200, 60)
 
-
-        for w in widgets:
-            layout.addWidget(w())
+        layout.addWidget(num_slider)
+        layout.addWidget(operation_box)
+        layout.addWidget(side_box)
+        layout.addWidget(roll_button)
 
         widget = QWidget()
         widget.setLayout(layout)
