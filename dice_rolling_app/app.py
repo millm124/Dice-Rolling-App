@@ -34,23 +34,24 @@ class MainWindow(QMainWindow):
 
         layout = QVBoxLayout()
         widgets = [
-            QCheckBox,
-            QComboBox,
-            QDateEdit,
-            QDateTimeEdit,
-            QDial,
-            QDoubleSpinBox,
-            QFontComboBox,
-            QLCDNumber,
-            QLabel,
-            QLineEdit,
-            QProgressBar,
-            QPushButton,
-            QRadioButton,
             QSlider,
-            QSpinBox,
-            QTimeEdit,
+            QComboBox,
+            QComboBox,
+            QPushButton,
+
         ]
+
+        num_slider = QSlider
+        num_slider.setRange(1, 100)
+
+        operation_box = QComboBox
+        operation_box.addItems(["Addition", "Multiplication", "Subtraction (L-R)", "ubtraction (R-L)", "division (L-R)", "division (R-L)"])
+
+        side_box = QComboBox
+        side_box.addItems(["4", "6", "8", "10", "12", "20", "100"])
+
+        roll_button = QPushButton(text = "Roll")
+
 
         for w in widgets:
             layout.addWidget(w())
