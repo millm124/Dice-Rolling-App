@@ -3,23 +3,12 @@ import sys
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import (
     QApplication,
-    QCheckBox,
     QComboBox,
-    QDateEdit,
-    QDateTimeEdit,
-    QDial,
-    QDoubleSpinBox,
-    QFontComboBox,
     QLabel,
-    QLCDNumber,
     QLineEdit,
     QMainWindow,
-    QProgressBar,
     QPushButton,
-    QRadioButton,
     QSlider,
-    QSpinBox,
-    QTimeEdit,
     QVBoxLayout,
     QWidget,
 )
@@ -36,31 +25,35 @@ class MainWindow(QMainWindow):
 
         dice_num = QLabel("Number of Dice Rolled")
 
-        num_slider = QSlider(Qt.Orientation.Horizontal)
-        num_slider.setRange(1, 100)
-        num_slider.setSingleStep(1)
+        self.num_slider = QSlider(Qt.Orientation.Horizontal)
+        self.num_slider.setRange(1, 100)
+        self.num_slider.setSingleStep(1)
 
         operation = QLabel("Operation Used")
 
-        operation_box = QComboBox()
-        operation_box.addItems(["Addition", "Multiplication", "Subtraction (L -> R)", "Subtraction (R -> L)", "Division (L -> R)", "Division (R -> L)"])
+        self.operation_box = QComboBox()
+        self.operation_box.addItems(["Addition", "Multiplication", "Subtraction (L -> R)", "Subtraction (R -> L)", "Division (L -> R)", "Division (R -> L)"])
 
         sides = QLabel("Sides of Dice")
 
-        side_box = QComboBox()
-        side_box.addItems(["4", "6", "8", "10", "12", "20", "100"])
+        self.side_box = QComboBox()
+        self.side_box.addItems(["4", "6", "8", "10", "12", "20", "100"])
 
         roll_button = QPushButton(text = "Roll", parent=self)
         roll_button.setFixedSize(200, 60)
+        roll_button.clicked.connect(self.roll)
+
+        self.display_label = QLineEdit("Total: ")
 
         layout.addWidget(dice_num)
-        layout.addWidget(num_slider)
+        layout.addWidget(self.num_slider)
         layout.addWidget(operation)
-        layout.addWidget(operation_box)
+        layout.addWidget(self.operation_box)
         layout.addWidget(sides)
-        layout.addWidget(side_box)
+        layout.addWidget(self.side_box)
         layout.addWidget(roll_button, alignment = Qt.AlignmentFlag.AlignHCenter)
-        #layout.setContentsMargins(5, 10, 5, 10)
+        layout.setContentsMargins(5, 10, 5, 10)
+        layout.addWidget(self.display_label)
 
         widget = QWidget()
         widget.setLayout(layout)
@@ -69,6 +62,12 @@ class MainWindow(QMainWindow):
         # to take up all the space in the window by default.
         self.setCentralWidget(widget)
 
+    def roll(self):
+        # get info from inputs and do the operation to calculate a total
+        dice_num = self.num_slider
+        operation = self.operation_box
+        dice_sides = self.side_box
+        # display total is a box
 
 app = QApplication(sys.argv)
 window = MainWindow()
