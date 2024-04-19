@@ -29,10 +29,12 @@ class MainWindow(QMainWindow):
         self.num_slider.setRange(1, 100)
         self.num_slider.setSingleStep(1)
 
+        number = self.num_slider
+
         operation = QLabel("Operation Used")
 
         self.operation_box = QComboBox()
-        self.operation_box.addItems(["Addition", "Multiplication", "Subtraction (L -> R)", "Subtraction (R -> L)", "Division (L -> R)", "Division (R -> L)"])
+        self.operation_box.addItems(["Addition", "Multiplication"])
 
         sides = QLabel("Sides of Dice")
 
@@ -47,6 +49,7 @@ class MainWindow(QMainWindow):
 
         layout.addWidget(dice_num)
         layout.addWidget(self.num_slider)
+        layout.addWidget(number)
         layout.addWidget(operation)
         layout.addWidget(self.operation_box)
         layout.addWidget(sides)
@@ -63,11 +66,18 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(widget)
 
     def roll(self):
+        
+        
         # get info from inputs and do the operation to calculate a total
-        dice_num = self.num_slider
-        operation = self.operation_box
-        dice_sides = self.side_box
-        # display total is a box
+
+        # dice_num = self.num_slider
+        # operation = self.operation_box.currentText()
+        # dice_sides = self.side_box.currentText()
+        
+        # display total in a line edit
+
+        self.display_label.setText()
+
 
 app = QApplication(sys.argv)
 window = MainWindow()
