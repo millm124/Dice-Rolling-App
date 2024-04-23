@@ -25,11 +25,15 @@ class MainWindow(QMainWindow):
 
         dice_num = QLabel("Number of Dice Rolled")
 
+        #configure slider
         self.num_slider = QSlider(Qt.Orientation.Horizontal)
         self.num_slider.setRange(1, 100)
         self.num_slider.setSingleStep(1)
 
-        number = self.num_slider
+        #add functionality
+        self.num_slider.valueChanged.connect(self.value_changed)
+
+        self.slider_output = QLabel("1")
 
         operation = QLabel("Operation Used")
 
@@ -49,7 +53,7 @@ class MainWindow(QMainWindow):
 
         layout.addWidget(dice_num)
         layout.addWidget(self.num_slider)
-        layout.addWidget(number)
+        layout.addWidget(self.slider_output)
         layout.addWidget(operation)
         layout.addWidget(self.operation_box)
         layout.addWidget(sides)
@@ -77,6 +81,10 @@ class MainWindow(QMainWindow):
         # display total in a line edit
 
         self.display_label.setText()
+
+    def value_changed(self):
+        slider_value = self.num_slider.value()
+        self.slider_output.setText(str(slider_value))
 
 
 app = QApplication(sys.argv)
