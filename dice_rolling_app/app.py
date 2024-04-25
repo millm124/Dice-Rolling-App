@@ -11,6 +11,7 @@ from PyQt6.QtWidgets import (
     QSlider,
     QVBoxLayout,
     QWidget,
+    QHBoxLayout,
 )
 
 
@@ -23,35 +24,41 @@ class MainWindow(QMainWindow):
 
         layout = QVBoxLayout()
 
+        # Slider
         dice_num = QLabel("Number of Dice Rolled")
-
-        #configure slider
+        
         self.num_slider = QSlider(Qt.Orientation.Horizontal)
         self.num_slider.setRange(1, 100)
         self.num_slider.setSingleStep(1)
-
-        #add functionality
         self.num_slider.valueChanged.connect(self.value_changed)
-
         self.slider_output = QLabel("1")
 
+        slider_layout = QHBoxLayout()
+        slider_layout.addWidget(self.num_slider)
+        slider_layout.addWidget(self.slider_output)
+
+        # Operation Combo Box
         operation = QLabel("Operation Used")
 
         self.operation_box = QComboBox()
         self.operation_box.addItems(["Addition", "Multiplication"])
 
+        # Sides Combo Box
         sides = QLabel("Sides of Dice")
 
         self.side_box = QComboBox()
         self.side_box.addItems(["4", "6", "8", "10", "12", "20", "100"])
 
+        # Roll Button
         roll_button = QPushButton(text = "Roll", parent=self)
         roll_button.setFixedSize(200, 60)
         roll_button.clicked.connect(self.roll)
 
         self.display_label = QLineEdit("Total: ")
 
+        
         layout.addWidget(dice_num)
+        layout.addLayout(slider_layout)
         layout.addWidget(self.num_slider)
         layout.addWidget(self.slider_output)
         layout.addWidget(operation)
