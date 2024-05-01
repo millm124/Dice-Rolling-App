@@ -14,10 +14,7 @@ from PyQt6.QtWidgets import (
     QHBoxLayout,
 )
 
-
-from random import seed
 from random import randint
-seed(1)
 
 
 # Subclass QMainWindow to customize your application's main window
@@ -103,31 +100,17 @@ class MainWindow(QMainWindow):
 
     def roll(self):
        
-        selection = self.side_box.currentText()
-        output_slider = self.num_slider.sliderPosition
+        sides = self.side_box.currentText()
+        sides = int(sides)
 
-
-        print(selection)
-        print(output_slider)
+        output_slider = self.num_slider.value()
        
 
 
-        # for i in range(output_slider):
-        #     dice_rolls = randint(1, selection)
-        #     print(dice_rolls)
+        for i in range(output_slider):
+            dice_rolls = randint(1, sides)
+            print(str(dice_rolls))
 
-
-        # get info from inputs and do the operation to calculate a total
-
-
-        # dice_num = self.num_slider
-        # operation = self.operation_box.currentText()
-        # dice_sides = self.side_box.currentText()
-       
-        # display total in a line edit
-
-
-        #self.display_label.setText()
 
 
     def value_changed(self):
