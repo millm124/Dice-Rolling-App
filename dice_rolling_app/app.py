@@ -67,12 +67,13 @@ class MainWindow(QMainWindow):
         roll_button.setFixedSize(200, 60)
         roll_button.clicked.connect(self.roll)
 
-
-        blank = QLabel("100, 100, 100, 100, 100, 100, 100, 100, 100, 100")
+        self.output_text = "100, 100, 100, 100, 100, 100, 100, 100, 100, 100"
+        self.rolled_dice = QLabel(self.output_text)
 
 
         total_value = self.side_box.currentText()
         self.display_label = QLabel("Total: " + str(total_value))
+        self.display_label.setWordWrap(True)
        
        
         layout.addWidget(dice_num)
@@ -85,7 +86,7 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.side_box)
         layout.addWidget(roll_button, alignment = Qt.AlignmentFlag.AlignHCenter)
         layout.setContentsMargins(5, 10, 5, 10)
-        layout.addWidget(blank)
+        layout.addWidget(self.rolled_dice)
         layout.addWidget(self.display_label)
 
 
@@ -106,10 +107,11 @@ class MainWindow(QMainWindow):
         output_slider = self.num_slider.value()
        
 
-
+        self.rolled_dice = "Rolls: "
         for i in range(output_slider):
             dice_rolls = randint(1, sides)
-            print(str(dice_rolls))
+            self.rolled_dice += str(dice_rolls) + " "
+        self.display_label.setText(self.rolled_dice)
 
 
 
