@@ -93,10 +93,13 @@ class MainWindow(QMainWindow):
 
         widget = QWidget()
         widget.setLayout(layout)
-
+        
         # Set the central widget of the Window. Widget will expand
         # to take up all the space in the window by default.
         self.setCentralWidget(widget)
+        height = self.height()
+        self.max_height = height - 100
+        self.resize(100, self.max_height)
 
     def roll(self):
 
@@ -115,6 +118,14 @@ class MainWindow(QMainWindow):
 
 
         self.display_label.setText(dice_rolls)
+        height = self.height()
+        width = self.width()
+        if dice_rolled >= 10:
+            height += 25
+            if height > self.max_height:
+                height = self.max_height
+            self.resize(width, height)
+
         self.total_value.setText("Total: " + str(total))
 
     def value_changed(self):
